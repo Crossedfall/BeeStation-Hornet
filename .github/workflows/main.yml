@@ -11,7 +11,7 @@ jobs:
         id: get_latest_release
         with:
           query: |
-            query prbody($owner:String!,$repo:String!,$pr) {
+            query prbody($owner:String!,$repo:String!,$pr:Int!) {
               repository(owner:$owner,name:$repo) {
                 pullRequest(number:$pr) {
                   bodyText            
