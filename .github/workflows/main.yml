@@ -16,7 +16,7 @@ jobs:
         query: |
           query pullrequest {
             repository(name: "beestation-hornet", owner: "crossedfall") {
-              pullRequest(number: 3){
+              pullRequest(number: $PR){
                 body
                 bodyHTML
                 bodyText
@@ -25,5 +25,6 @@ jobs:
           }
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        PR: ${{ github.event.pull_request.number }}
 
     - run: "echo 'latest release: ${{ steps.get_latest_release.outputs.data }}'"
