@@ -23,4 +23,7 @@ jobs:
           pr: ${{ github.event.pull_request.number }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: "echo 'latest release: ${{ steps.get_latest_release.outputs.data }}'"
+      - run: |
+          touch ./test.txt
+          printf "%s" "${{ steps.get_latest_release.outputs.data }}" > ./test.txt
+          cat ./test.txt
