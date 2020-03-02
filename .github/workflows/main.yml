@@ -15,15 +15,14 @@ jobs:
       with:
         query: |
           query pullrequest {
-            repository(name: "$repo", owner: "$owner") {
-              pullRequest(number: $pr) {
+            repository(name: "beestation-hornet", owner: "crossedfall") {
+              pullRequest(number: 3){
                 body
+                bodyHTML
+                bodyText
               }
             }
           }
-        owner: ${{ github.event.repository.owner.login }}
-        repo: ${{ github.event.repository.name }}
-        pr: ${{ github.event.pull_request.number }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
