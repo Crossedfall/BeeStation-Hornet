@@ -1,11 +1,17 @@
 import sys
 import re
 import yaml
+import json
 
-CL_BODY = re.compile(r":cl:(.+)?\\r\\n((.|\\n|\\r)+?)\\r\\n\/:cl:", re.MULTILINE)
+CL_BODY = re.compile(r":cl:(.+)?\r\n((.|\n|\r)+?)\r\n\/:cl:", re.MULTILINE)
 CL_SPLIT = re.compile(r"(^\w+):\s+(\w.+)", re.MULTILINE)
 
-pr_body = sys.argv[1]
+if len(sys.argv) < 2:
+    print("No CL provided")
+    quit()
+
+pr_body = bytes(sys.argv[1], "utf-8").decode("unicode_escape")
+print(pr_body)
 write_cl = {}
 try:
     cl = CL_BODY.search(pr_body)

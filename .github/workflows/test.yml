@@ -21,4 +21,4 @@ jobs:
       - name: The big one
         env:
           GITHUB_CONTEXT: ${{ toJson(github.event.pull_request.body) }}
-        run: python tools/test.py "$GITHUB_CONTEXT"
+        run: python tools/changelog/test.py "$GITHUB_CONTEXT"
