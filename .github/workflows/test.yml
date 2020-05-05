@@ -2,10 +2,11 @@ name: CI
 
 on:
   pull_request:
-    types: [opened, reopened]
+    types: [closed]
 
 jobs:
   MakeCL:
+    if: github.event.pull_request.merged == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
