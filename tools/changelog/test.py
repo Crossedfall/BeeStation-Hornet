@@ -24,7 +24,7 @@ except AttributeError:
 if cl.group(1) is not None:
     write_cl['author'] = cl.group(1).lstrip()
 
-with open(Path.cwd().joinpath("tags.yml")) as file:
+with open(Path.cwd().joinpath("tools/changelog/tags.yml")) as file:
     tags = yaml.full_load(file)
 
 write_cl['changes'] = {}
@@ -36,7 +36,7 @@ for k, v in cl_list:
             write_cl['changes'][tags['tags'][k]] = v
 
 if write_cl['changes']:
-    with open(Path.cwd().joinpath("test.yml"), 'w') as file:
+    with open(Path.cwd().joinpath("tools/changelog/test.yml"), 'w') as file:
         end = yaml.dump(write_cl, file)
 
     print(f"Done!\n{end}")
