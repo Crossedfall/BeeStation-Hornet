@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  pull_request:
+    types: [opened, closed, reopened]
+
+jobs:
+  one:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Python setup
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+      - name: Install depends
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+      - name: The big one
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github.event.pull_request.body) }}
+        run: |
+          echo "$GITHUB_CONTEXT"
+          python /tools/test.py "$GITHUB_CONTEXT"
