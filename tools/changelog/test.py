@@ -9,7 +9,7 @@ CL_SPLIT = re.compile(r"(^\w+):\s+(\w.+)", re.MULTILINE)
 
 if len(sys.argv) < 3:
     print("Missing arguments")
-    quit()
+    exit(1)
 pr_number = bytes(sys.argv[2], "utf-8").decode("unicode_escape")
 pr_body = bytes(sys.argv[1], "utf-8").decode("unicode_escape")
 
@@ -19,7 +19,7 @@ try:
     cl_list = CL_SPLIT.findall(cl.group(2))
 except AttributeError:
     print("No CL!")
-    quit()
+    exit(1)
 
 
 if cl.group(1) is not None:
@@ -43,3 +43,4 @@ if write_cl['changes']:
     print(f"Done!")
 else:
     print("No changes!")
+    exit(1)
