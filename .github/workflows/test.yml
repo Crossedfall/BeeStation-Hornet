@@ -22,8 +22,8 @@ jobs:
         env:
           PR_BODY: ${{ toJson(github.event.pull_request.body) }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
-          PR_AUTHOR: ${{ github.event.pull_request.user }}
-        run: python tools/changelog/test.py "$PR_BODY" $PR_NUMBER $PR_AUTHOR
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+        run: python tools/changelog/test.py "$PR_BODY" $PR_NUMBER "$PR_AUTHOR"
       - name: Compile CL
         run: python tools/changelog/ss13_genchangelog.py html/changelog.html html/changelogs
       - name: Commit
