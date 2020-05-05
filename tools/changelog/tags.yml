@@ -27,6 +27,7 @@ tags:
     dels: *del_type
     rscdel: *del_type
     imageadd: imageadd
+    imagedel: imagedel
     typo: &typo_type spellcheck
     spellcheck: *typo_type
     balance: &balance_type balance
@@ -46,6 +47,7 @@ defaults:
     code_imp: changed some code
     config: changed some config setting
     imageadd: added some icons and images
+    imagedel: deleted some icons and images
     refactor: refactored some code
     rscadd: Added new things
     rscadd2: Added more things
