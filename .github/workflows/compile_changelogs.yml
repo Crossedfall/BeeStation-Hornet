@@ -2,7 +2,7 @@ name: Compile changelogs
 
 on:
   schedule:
-    - cron: 0 */2 * ? * *
+    - cron: */2 * * * *
 
 jobs:
   CompileCL:
