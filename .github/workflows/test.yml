@@ -22,7 +22,7 @@ jobs:
         env:
           PR_BODY: ${{ toJson(github.event.pull_request.body) }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
-        run: python tools/changelog/test.py "$GITHUB_CONTEXT" $PR_NUMBER
+        run: python tools/changelog/test.py $GITHUB_CONTEXT $PR_NUMBER
       - name: Compile CL
         run: python tools/ss13_genchangelog.py html/changelog.html html/changelogs
       - name: Commit
