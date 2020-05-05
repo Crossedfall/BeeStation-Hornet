@@ -7,11 +7,12 @@ from pathlib import Path
 CL_BODY = re.compile(r":cl:(.+)?\r\n((.|\n|\r)+?)\r\n\/:cl:", re.MULTILINE)
 CL_SPLIT = re.compile(r"(^\w+):\s+(\w.+)", re.MULTILINE)
 
-if len(sys.argv) < 2:
-    print("No CL provided")
+if len(sys.argv) < 3:
+    print("Missing arguments")
     quit()
-
+pr_number = bytes(sys.argv[2], "utf-8").decode("unicode_escape")
 pr_body = bytes(sys.argv[1], "utf-8").decode("unicode_escape")
+
 write_cl = {}
 try:
     cl = CL_BODY.search(pr_body)
@@ -36,9 +37,9 @@ for k, v in cl_list:
             write_cl['changes'][tags['tags'][k]] = v
 
 if write_cl['changes']:
-    with open(Path.cwd().joinpath("tools/changelog/test.yml"), 'w') as file:
-        end = yaml.dump(write_cl, file)
+    with open(Path.cwd().joinpath(f"html/changelogs/AutoChangeLog-pr-{pr_number}.yml"), 'w') as file:
+        yaml.dump(write_cl, file)
 
-    print(f"Done!\n{end}")
+    print(f"Done!")
 else:
     print("No changes!")
