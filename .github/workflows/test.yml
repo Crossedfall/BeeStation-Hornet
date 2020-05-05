@@ -24,7 +24,6 @@ jobs:
           PR_NUMBER: github.event.pull_request.number
         run: python tools/changelog/test.py "$GITHUB_CONTEXT" $PR_NUMBER
       - name: Compile CL
-        run: run: '(test -f README && echo README exists) || echo README does not exist, skipping step'
         run: python tools/ss13_genchangelog.py html/changelog.html html/changelogs
       - name: Commit
         run: |
