@@ -2,6 +2,7 @@ import sys
 import re
 import yaml
 import json
+from pathlib import Path
 
 CL_BODY = re.compile(r":cl:(.+)?\r\n((.|\n|\r)+?)\r\n\/:cl:", re.MULTILINE)
 CL_SPLIT = re.compile(r"(^\w+):\s+(\w.+)", re.MULTILINE)
@@ -11,7 +12,6 @@ if len(sys.argv) < 2:
     quit()
 
 pr_body = bytes(sys.argv[1], "utf-8").decode("unicode_escape")
-print(pr_body)
 write_cl = {}
 try:
     cl = CL_BODY.search(pr_body)
@@ -24,7 +24,7 @@ except AttributeError:
 if cl.group(1) is not None:
     write_cl['author'] = cl.group(1).lstrip()
 
-with open(r"tags.yml") as file:
+with open(Path.cwd().joinpath("tags.yml")) as file:
     tags = yaml.full_load(file)
 
 write_cl['changes'] = {}
@@ -36,7 +36,7 @@ for k, v in cl_list:
             write_cl['changes'][tags['tags'][k]] = v
 
 if write_cl['changes']:
-    with open(r'changes.yml', 'w') as file:
+    with open(Path.cwd().joinpath("test.yml"), 'w') as file:
         end = yaml.dump(write_cl, file)
 
     print(f"Done!\n{end}")
