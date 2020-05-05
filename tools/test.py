@@ -2,7 +2,7 @@ import sys
 import re
 import yaml
 
-CL_BODY = re.compile(r":cl:(.+)?\r\n((.|\n|\r)+?)\r\n\/:cl:", re.MULTILINE)
+CL_BODY = re.compile(r":cl:(.+)?\\r\\n((.|\\n|\\r)+?)\\r\\n\/:cl:", re.MULTILINE)
 CL_SPLIT = re.compile(r"(^\w+):\s+(\w.+)", re.MULTILINE)
 
 pr_body = sys.argv[1]
