@@ -10,9 +10,12 @@ CL_SPLIT = re.compile(r"(^\w+):\s+(\w.+)", re.MULTILINE)
 if len(sys.argv) < 3:
     print("Missing arguments")
     exit(1)
-    
+
 pr_number = bytes(sys.argv[2], "utf-8").decode("unicode_escape")
 pr_body = bytes(sys.argv[1], "utf-8").decode("unicode_escape")
+
+print(pr_body)
+print(pr_number)
 
 write_cl = {}
 try:
