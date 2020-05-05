@@ -2,11 +2,12 @@ name: Compile changelogs
 
 on:
   schedule:
-    - cron: 0 */2 * ? * *
+    - cron: "*/2 * * * *"
 
 jobs:
   CompileCL:
     runs-on: ubuntu-latest
+    if: github.repository == 'BeeStation/BeeStation-Hornet'
     steps:
       - name: Checkout
         uses: actions/checkout@v1
