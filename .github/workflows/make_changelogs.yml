@@ -38,4 +38,4 @@ jobs:
           git pull origin master
           git add -A html/changelogs/.
           git commit -m " Automatic changelog generation for PR #$PR_NUMBER [ci skip]" -a || true
-          git push https://crossedfall:${{ secrets.CL_TOKEN }}@github.com/Crossedfall/BeeStation-Hornet.git"
+          git push https://crossedfall:${{ secrets.CL_TOKEN }}@github.com/Crossedfall/BeeStation-Hornet.git
