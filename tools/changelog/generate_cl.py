@@ -1,7 +1,7 @@
 """
 DO NOT MANUALLY RUN THIS SCRIPT.
 """
-import sys
+import os
 import re
 from pathlib import Path
 from ruamel import yaml
@@ -10,14 +10,10 @@ from github import Github
 CL_BODY = re.compile(r":cl:(.+)?\r\n((.|\n|\r)+?)\r\n\/:cl:", re.MULTILINE)
 CL_SPLIT = re.compile(r"(^\w+):\s+(\w.+)", re.MULTILINE)
 
-if len(sys.argv) < 4:
-    print("Missing arguments")
-    exit(1)
-
 # Blessed is the GoOnStAtIoN birb ZeWaKa for thinking of this first
-repo = sys.argv[1]
-token = sys.argv[2]
-sha = sys.argv[3]
+repo = os.environ["GITHUB_REPOSITORY"]
+token = os.environ["GITHUB_TOKEN"]
+sha = os.environ["GITHUB_SHA"]
 
 git = Github(token)
 repo = git.get_repo(repo)
@@ -33,6 +29,8 @@ pr = pr_list[0]
 pr_body = pr.body
 pr_number = pr.number
 pr_author = pr.user.login
+
+os.environ["PR_NUMBER"] = f"{pr_number}"
 
 write_cl = {}
 try:

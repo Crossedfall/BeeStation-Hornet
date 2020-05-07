@@ -7,7 +7,6 @@ on:
 jobs:
   MakeCL:
     runs-on: ubuntu-latest
-    if: github.repository == 'BeeStation/BeeStation-Hornet'
     steps:
       - name: Checkout
         uses: actions/checkout@v1
@@ -22,10 +21,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install ruamel.yaml PyGithub
       - name: Make CL
-        run: python tools/changelog/generate_cl.py $GITHUB_REPOSITORY ${{ secrets.GITHUB_TOKEN }} $GITHUB_SHA
-      - name: Commit
         env:
-          PR_NUMBER: ${{ github.event.pull_request.number }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python tools/changelog/generate_cl.py
+      - name: Commit
         run: |
           git config --local user.email "56381746+ss13-beebot@users.noreply.github.com"
           git config --local user.name "ss13-beebot"
