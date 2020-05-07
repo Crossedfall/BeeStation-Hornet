@@ -10,10 +10,13 @@ from github import Github
 CL_BODY = re.compile(r":cl:(.+)?\r\n((.|\n|\r)+?)\r\n\/:cl:", re.MULTILINE)
 CL_SPLIT = re.compile(r"(^\w+):\s+(\w.+)", re.MULTILINE)
 
+git_email = os.getenv("GIT_EMAIL")
+git_name = os.getenv("GIT_NAME")
+
 # Blessed is the GoOnStAtIoN birb ZeWaKa for thinking of this first
-repo = os.environ["GITHUB_REPOSITORY"]
-token = os.environ["GITHUB_TOKEN"]
-sha = os.environ["GITHUB_SHA"]
+repo = os.getenv("GITHUB_REPOSITORY")
+token = os.getenv("GITHUB_TOKEN")
+sha = os.getenv("GITHUB_SHA")
 
 git = Github(token)
 repo = git.get_repo(repo)
@@ -29,8 +32,6 @@ pr = pr_list[0]
 pr_body = pr.body
 pr_number = pr.number
 pr_author = pr.user.login
-
-os.environ["PR_NUMBER"] = f"{pr_number}"
 
 write_cl = {}
 try:
@@ -65,6 +66,7 @@ if write_cl['changes']:
         yaml.indent(sequence=4, offset=2)
         yaml.dump(write_cl, file)
 
+    repo.create_file(Path.cwd().joinpath(f"html/changelogs/AutoChangeLog-pr-{pr_number}.yml"), f"Automatic changelog generation for PR #{pr_number} [ci skip]", branch='master', committer={git_name: git_email})
     print("Done!")
 else:
     print("No CL changes detected!")
