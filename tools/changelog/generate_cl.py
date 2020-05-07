@@ -33,6 +33,8 @@ pr_body = pr.body
 pr_number = pr.number
 pr_author = pr.user.login
 
+os.environ["PR_NUMBER"] = f"{pr_number}"
+
 write_cl = {}
 try:
     cl = CL_BODY.search(pr_body)
