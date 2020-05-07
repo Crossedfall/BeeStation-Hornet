@@ -23,8 +23,8 @@ jobs:
       - name: Make CL & Commit
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: python tools/changelog/generate_cl.py
         run: |
+          python tools/changelog/generate_cl.py
           git config --local user.email "56381746+ss13-beebot@users.noreply.github.com"
           git config --local user.name "ss13-beebot"
           git pull origin master
