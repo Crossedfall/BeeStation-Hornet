@@ -68,7 +68,7 @@ if write_cl['changes']:
         yaml.indent(sequence=4, offset=2)
         yaml.dump(write_cl, file)
 
-    repo.create_file(f"html/changelogs/AutoChangeLog-pr-{pr_number}.yml", f"Automatic changelog generation for PR #{pr_number} [ci skip]", "Test", branch='master', committer=InputGitAuthor(git_name, git_email))
+    repo.create_file(Path.cwd().joinpath(f"html/changelogs/AutoChangeLog-pr-{pr_number}.yml"), f"Automatic changelog generation for PR #{pr_number} [ci skip]", "Test", branch='master', committer=InputGitAuthor(git_name, git_email))
     print("Done!")
 else:
     print("No CL changes detected!")
