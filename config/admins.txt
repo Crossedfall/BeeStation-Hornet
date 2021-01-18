@@ -11,6 +11,5 @@
 ###############################################################################################
 Ike709 = Host
 Crossedfall = Host
-CthulhuOnIce = Host
 
 # the rest are in the db
