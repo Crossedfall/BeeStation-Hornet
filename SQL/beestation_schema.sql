@@ -471,7 +471,7 @@ CREATE TABLE IF NOT EXISTS `SS13_round` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6524 DEFAULT CHARSET=utf8mb4;
 
-
+-- test
 
 -- Dumping structure for table ss13tgdb.SS13_schema_revision
 DROP TABLE IF EXISTS `SS13_schema_revision`;
