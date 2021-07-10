@@ -8,7 +8,7 @@ export const AbductorConsole = (props, context) => {
   return (
     <Window
       theme="abductor"
-      width={600}
+      width={800}
       height={532}>
       <Window.Content scrollable>
         <Tabs>
